@@ -114,6 +114,11 @@ public class Dessin extends Canvas {
 		        	break;
 		        }
 		        
+		        case "NRZI" : {
+		        	nrzi(g);
+		        	break;
+		        }
+		        
 		        case "Miller" : {
 				    miller(g);
 				    break;
@@ -140,6 +145,26 @@ public class Dessin extends Canvas {
 				y_ap = bas;
 			}
 			
+			nrzPartage(g);
+			return;
+		}
+		
+		public void nrzi(Graphics g) {
+			// Si le nombre commence par 0 on commence en bas
+			if(str.charAt(0) == '1') {
+				y_av = bas;
+				y_ap = bas;
+			}
+			nrzPartage(g);
+			
+			return;
+		}
+		
+		/**
+		 * Methode pour reutiliser le code dans nrz et nrzi
+		 * @param g
+		 */
+		public void nrzPartage(Graphics g) {
 			for (int n=0; n < str.length(); n++) {
 			 	char c = str.charAt(n);
 			 	
@@ -152,7 +177,6 @@ public class Dessin extends Canvas {
 			 		}
 			 	}		 		
 			 }
-			return;
 		}
 		
 		/**
