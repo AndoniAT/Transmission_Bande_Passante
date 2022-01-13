@@ -28,91 +28,32 @@ public class Fenetre extends JFrame implements ActionListener{
 	public DessinNRZ d;
 	public JPanel dessinPanel;
 	public Dessin dd;
+	public BoxLayout boxL;
 	
 	public Fenetre() {
-		
-		setBounds(100,100,300,500);
-		setTitle("Titre");
-		
-		// Panel de bouttons
-		JPanel jpBouttons = new JPanel();
-		
-		// Layout pour les bouttons
-		FlowLayout flButton = new FlowLayout();
-		
-		// On étabi le layout dans le panel
-		jpBouttons.setLayout(flButton);
-		
-		// Creation de bouttons
-		jb1 = new JButton("Manchester");
-		jb1.addActionListener(this);
-		
-		jb2 = new JButton("Manchester Differenciel");
-		jb2.addActionListener(this);
-		
-		jb3 = new JButton("NRZ");
-		jb3.addActionListener(this);
-		
-		jb4 = new JButton("Miller");
-		jb4.addActionListener(this);
-		
-		// Ajout des bouttons dans le panel
-		jpBouttons.add(jb1);
-		jpBouttons.add(jb2);
-		jpBouttons.add(jb3);
-		jpBouttons.add(jb4);
-		
-		
-		// Panel du texte
-		jpTexte = new JPanel();
-		JLabel texte = new JLabel("Veuilliez de saissir votre nombre binaire : ");
-		
-		// Champ pour écrire le nombre binaire
-		edit = new JTextField(15);
-		
-		// Ajout du texte et du champ dans le panel
-		jpTexte.add(texte);
-		jpTexte.add(edit);
-		
-		// Ajout de paneaux
-		add(jpBouttons, BorderLayout.NORTH);
-		add(jpTexte, BorderLayout.CENTER);
-		
-		// Panel pour le dessin
-		dessinPanel = new JPanel();
-		
-		// Creation du dessin
-		d = new DessinNRZ();
-		// Ajout du dessin eu Panel
-		//dessinPanel.add(d);
-		
-		// Ajout du panel au JFrame
-        //add(dessinPanel, BorderLayout.SOUTH);
-        //add(dd, BorderLayout.SOUTH);
-        
-        // Sortir du programme
+		super("Transmission Bande Passante");
+		creation();
+
+		// Sortir du programme
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		//setSize(500, 500);
-		pack();
+        pack();
+
 		setVisible(true);
 	}
 	
 	 public void actionPerformed(ActionEvent e){
-		 System.out.println("mmm");
-		 	// quand on a cliqué sur le bouton ici
+		 	// Quand on a cliqué sur le bouton ici
 	        JButton b = (JButton)e.getSource();
 	        String s = e.getActionCommand();
 	        
 	        d.setChoix(s);
 	        d.setStr(edit.getText());
-			//d.setE(e);
 	        d.repaint();
-	        //jpTexte.repaint();
-	        //add(jpTexte);
 	        
-	        add(d);
-
+	        //jpTexte.repaint();
+	        //add(jpTexte, BorderLayout.WEST);
+	        add(d, BorderLayout.CENTER);
 	        
 	        int w = 100;
 	        
@@ -126,7 +67,65 @@ public class Fenetre extends JFrame implements ActionListener{
 	        }
 	        
 	        setSize(w, 500);
-
-
-	    }
+	 }
+	 
+	 public void creation () {
+		 	
+		 // === BOUTTONS ======= 
+		 	
+		 	// Panel de bouttons
+			JPanel jpBouttons = new JPanel();
+			
+			// Layout pour les bouttons
+			FlowLayout flButton = new FlowLayout();
+			
+			// On étabi le layout dans le panel
+			jpBouttons.setLayout(flButton);
+			
+			// Creation de bouttons
+			jb1 = new JButton("Manchester");
+			jb2 = new JButton("Manchester Differenciel");
+			jb3 = new JButton("NRZ");
+			jb4 = new JButton("Miller");
+			
+			// Ajout listener pour les bouttons
+			jb1.addActionListener(this);
+			jb2.addActionListener(this);
+			jb3.addActionListener(this);
+			jb4.addActionListener(this);
+			
+			// Ajout des bouttons dans le panel
+			jpBouttons.add(jb1);
+			jpBouttons.add(jb2);
+			jpBouttons.add(jb3);
+			jpBouttons.add(jb4);
+			
+			// Ajout dand le JFrame
+			add(jpBouttons, BorderLayout.NORTH);
+			
+		// ====== TEXTE ET TEXTFIELD ==========
+			
+			// Panel du texte
+			jpTexte = new JPanel();
+			
+			// Layout
+			boxL = new BoxLayout(jpTexte, BoxLayout.Y_AXIS);
+	        
+			// Label Texte
+			JLabel texte = new JLabel("Veuilliez de saissir votre nombre binaire : ");
+			
+			// Text Field : Champ pour écrire le nombre binaire
+			edit = new JTextField(15);
+			
+			// Ajout du texte et du champ dans le panel
+			jpTexte.add(texte);
+			jpTexte.add(edit);
+			
+			// Ajout dand le JFrame
+			add(jpTexte, BorderLayout.CENTER);
+			
+		// ====== DESSIN ==========
+			// Creation du dessin
+			d = new DessinNRZ();
+	 }
 }

@@ -1,11 +1,19 @@
 package ex;
 
+import javax.swing.SwingUtilities;
+
+
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Fenetre fn = new Fenetre();
-		fn.setVisible(true);
+		System.out.println("begin");
+		
+		SwingUtilities.invokeLater(
+				() -> {
+					new Fenetre();
+				}
+				);
 	}
 
 }
