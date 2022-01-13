@@ -13,6 +13,11 @@ public class DessinNRZ extends Canvas implements Dess{
 		public String str;
 		public String choix;
 		public ActionEvent e;
+
+		public int x_ap;
+		public int y_av;
+		public int y_ap;
+		public int x_av; 
 		
 		public DessinNRZ() {
 		}
@@ -87,6 +92,60 @@ public class DessinNRZ extends Canvas implements Dess{
 		
 		
 		public void nrz(Graphics g) {
+			creationBase(g);
+			
+			for (int n=0; n < str.length(); n++) {
+			 	char c = str.charAt (n);
+			 	
+			 	g.drawLine(x_av, y_av, x_ap, y_ap);
+			 		
+			 	x_av = x_ap;
+			 	
+			 	if(n+1 < str.length()) {
+			 		if(change(n, c)) {
+			 			
+			 			if(str.charAt(n+1) == '0') {
+			 				y_ap = y_ap + 200;
+			 			} else {
+			 				y_ap = y_ap - 200;
+			 			}
+			 			
+			 			g.drawLine(x_av, y_av, x_ap, y_ap);
+			 			y_av = y_ap;
+			 		}
+
+			 	}
+			 				 		
+			 	x_ap = x_ap + 50;	
+			 	
+			 }
+
+		}
+		
+		private boolean change(int n, char c) {
+			boolean change;
+			if(str.charAt(n+1) != c) {
+				change = true;
+			} else {
+				change = false;
+			}
+			return change;
+		}
+		
+		
+		public void miller(Graphics g) {
+			creationBase(g);
+		}
+		
+		public void manchesterDiff(Graphics g) {
+			creationBase(g);
+		}
+		
+		public void manchester(Graphics g) {
+			creationBase(g);
+		}
+
+		public void creationBase(Graphics g) {
 			Graphics2D g2d = (Graphics2D)g;
 			// Obtenir le le maximum
 			int max = 100;
@@ -112,11 +171,6 @@ public class DessinNRZ extends Canvas implements Dess{
 			g.drawLine(100, 100, max, 100);
 			g.drawLine(100, 200, max, 200);
 			g.drawLine(100, 300, max, 300);
-			
-			int x_ap;
-			int y_av;
-			int y_ap;
-			int x_av;
 			
 			if(str.length() == 0) {
 				return;
@@ -145,59 +199,9 @@ public class DessinNRZ extends Canvas implements Dess{
 			g.drawString("0V", 50, 200);
 			g.drawString("-nV", 50, 300);
 			
-			
-			boolean change = false;
-			
 			BasicStroke bsLine = new BasicStroke(6);
 			g2d.setStroke(bsLine);
 			g2d.setColor(Color.RED);
 			
-			
-			for (int n=0; n < str.length(); n++) {
-			 	char c = str.charAt (n);
-			 	
-			 	g.drawLine(x_av, y_av, x_ap, y_ap);
-			 		
-			 	x_av = x_ap;
-			 	
-			 	if(n+1 < str.length()) {
-			 		if(change(n, c)) {
-			 			
-			 			if(str.charAt(n+1) == '0') {
-			 				y_ap = y_ap + 200;
-			 			} else {
-			 				y_ap = y_ap - 200;
-			 			}
-			 			
-			 			g.drawLine(x_av, y_av, x_ap, y_ap);
-			 			y_av = y_ap;
-			 		}
-
-			 	}
-			 				 		
-			 		 
-			 	//x_av = x_av + 5;
-			 	x_ap = x_ap + 50;	
-			 		
-			 	
-			 }
-
 		}
-		
-		private boolean change(int n, char c) {
-			boolean change;
-			if(str.charAt(n+1) != c) {
-				change = true;
-			} else {
-				change = false;
-			}
-			return change;
-		}
-		
-		
-		public void miller(Graphics g) {}
-		
-		public void manchesterDiff(Graphics g) {}
-		
-		public void manchester(Graphics g) {}
 }
