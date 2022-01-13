@@ -72,14 +72,13 @@ public class DessinNRZ extends Canvas {
 		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
-			System.out.println("holaaaa");
-			
+			creationBase(g);
 			// Si il n'y a rien écrit on ne fait rien
 			if(str.length() == 0 ) {
 				return;
 			}
 			
-			creationBase(g);
+			
 			// Appel de methodes selon le boutton choisi
 			switch(choix) {
 		        case "Manchester Differenciel" : {
@@ -212,21 +211,28 @@ public class DessinNRZ extends Canvas {
 		 * @param g
 		 */
 		public void creationBase(Graphics g) {
+			int largeur = str.length();
+			
+			if(largeur == 0 ) {
+				largeur = 5;
+			}
+			
 			Graphics2D g2d = (Graphics2D)g;
+			
 			// Obtenir le le maximum
 			int max = 100;
 			
-			for(int i = 1; i <= str.length(); i++) {
+			for(int i = 1; i <= largeur; i++) {
 				max = max + 50;
 			}
 			
 			// On fait le bord
 			g.setColor(Color.BLUE);
-			g.drawRect(izq - 10, haut - 40, str.length() * 50 + 20, 280);
+			g.drawRect(izq - 10, haut - 40, largeur * 50 + 20, 280);
 			
 			// Section cadre gris
 			g.setColor(Color.GRAY);
-			for(int i = izq, j = 0 ; j <= str.length() ; i = i + 50, j++) {
+			for(int i = izq, j = 0 ; j <= largeur ; i = i + 50, j++) {
 				g.drawLine(i, haut - 20, i, bas + 20);
 			}
 			
@@ -254,8 +260,13 @@ public class DessinNRZ extends Canvas {
 			BasicStroke bsLine = new BasicStroke(6);
 			g2d.setStroke(bsLine);
 			
-			g2d.setColor(Color.RED);
+			g.setColor(Color.BLACK);
+			for (int i = 0, j = izq + saut; i < str.length(); i++, j = j + double_saut) {
+				char c = str.charAt(i);
+				g.drawString(c + "", j, haut - 5);
+			}
 			
+			g2d.setColor(Color.RED);
 		}
 		
 		/**
