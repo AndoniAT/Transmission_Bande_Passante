@@ -1,15 +1,9 @@
 package ex;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,33 +12,25 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Fenetre extends JFrame implements ActionListener{
-	public JButton jb1;
-	public JButton jb2;
-	public JButton jb3;
-	public JButton jb4;
+	// Bouttons
+	public JButton jb1 , jb2 ,jb3, jb4;
+	
+	// Panels
+	public JPanel jpTexte, jpBT;
+	
+	// Layouts
+	public BoxLayout boxL, boxBT;
+	
+	//Autres
 	public JTextField edit;
-	public JPanel jpTexte;
-	
-	public JPanel jpDessin;
-	public DessinNRZ d;
-	public JPanel dessinPanel;
-	public Dessin dd;
-	public BoxLayout boxL;
+	public Dessin d;
 	public String txt;
-	
-	public JPanel jp;
-	public BoxLayout box;
-	
-	
-	public BoxLayout boxBT;
-	public JPanel jpBT;
 	public JLabel texte;
 	
 	public Fenetre() {
 		super("Transmission Bande Passante");
-		creation();
 		
-		//setSize(500,500);
+		creation();
 		
 		// Sortir du programme
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -56,32 +42,29 @@ public class Fenetre extends JFrame implements ActionListener{
 		init();
 	}
 	
+	/**
+	 * Action des bouttons
+	 */
 	 public void actionPerformed(ActionEvent e){
-		 // Quand on a cliqué sur le bouton ici
 	        JButton b = (JButton)e.getSource();
 	        String s = e.getActionCommand();
-	        
 	        
 	        d.setChoix(s);
 	        d.setStr(edit.getText());
 	        add(d, BorderLayout.CENTER);
 	        
-			int w = 100;
+			int w = 150;
+	        for (int n=0; n <= edit.getText().length(); n++) w = w + 50;
 	        
-	        for (int n=0; n <= edit.getText().length(); n++) {
-	        	w = w + 50;
-	        }
+	        if(w < 500) w = 500;
 	        
-	        w = w + 50;
-	        
-	        if(w < 500) {
-	        	w = 500;
-	        }
-	        
-			setSize(w, 500);
+	        setSize(w, 500);
 			setLocationRelativeTo(null);
 	 }
 	
+	 /**
+	  * Initialisation de la fenetre
+	  */
 	 public void init(){
 	        d.setStr(edit.getText());
 	        add(d, BorderLayout.CENTER);
@@ -89,14 +72,10 @@ public class Fenetre extends JFrame implements ActionListener{
 			setLocationRelativeTo(null);
 	 }
 	
-	 
+	 /**
+	  * Traitement pour la creation de la fenetre
+	  */
 	 public void creation () {
-		// setSize(500,500);
-		 jp = new JPanel();
-		 jpDessin = new JPanel();
-		 
-		 box = new BoxLayout(jp, BoxLayout.Y_AXIS);
-		 
 		 // Panel pour Bouttons et text 
 		 jpBT = new JPanel();
 		 boxBT = new BoxLayout(jpBT, BoxLayout.Y_AXIS);
@@ -131,9 +110,6 @@ public class Fenetre extends JFrame implements ActionListener{
 			jpBouttons.add(jb3);
 			jpBouttons.add(jb4);
 			
-			// Ajout dand le JFrame
-			//add(jpBouttons, BorderLayout.PAGE_START);
-			
 			// Ajout bouttons dans le JPanel
 			jpBT.add(jpBouttons);
 			
@@ -158,13 +134,9 @@ public class Fenetre extends JFrame implements ActionListener{
 			jpBT.add(jpTexte);
 			
 			add(jpBT, BorderLayout.NORTH);
-			//add(jpDessin, BorderLayout.CENTER);
 			
 		// ====== DESSIN ==========
 			// Creation du dessin
-			d = new DessinNRZ();
+			d = new Dessin();
 	 }
 }
-
-
-
