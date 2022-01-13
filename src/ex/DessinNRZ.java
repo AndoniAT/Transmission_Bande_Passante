@@ -106,8 +106,8 @@ public class DessinNRZ extends Canvas {
 		 */
 		public void nrz(Graphics g) {
 			if(str.charAt(0) == '0') {
-				y_av = 300;
-				y_ap = 300;
+				y_av = bas;
+				y_ap = bas;
 			}
 			
 			for (int n=0; n < str.length(); n++) {
@@ -125,25 +125,20 @@ public class DessinNRZ extends Canvas {
 		}
 		
 		public void manchester(Graphics g) {
-			x_av = 100;
-			x_ap = 125;
+			if(str.charAt(0) == '0') {
+				y_av = bas;
+				y_ap = bas;
+			}
 			
 			for (int n=0; n < str.length(); n++) {
 			 	char c = str.charAt (n);
-			 	
-			 	if(c == '1') {
-			 		condMan(g, 1);
-				} else {
-					condMan(g, 0);
-				}
-			 	
+			 	faireChemin(g);
 			 	if(n+1 < str.length()) {
 				 	if(!change(n, c)) {
-				 		g.drawLine(x_av, haut, x_av, bas);
+				 		faireLigneVerticale(g);
 				 	}
 			 	}
 			}
-			
 		}
 		
 		/**
@@ -276,7 +271,7 @@ public class DessinNRZ extends Canvas {
 			}
 			
 			
-			g.drawLine(x_av, y_av, x_ap, y_ap);
+			draw(g);
 			
 			x_av = x_ap;
 			
@@ -286,11 +281,11 @@ public class DessinNRZ extends Canvas {
 				y_ap = haut;
 			}
 			
-			g.drawLine(x_av, y_av, x_ap, y_ap);
+			draw(g);
 			
 			x_ap = x_ap + 25;
 			y_av = y_ap;
-			g.drawLine(x_av, y_av, x_ap, y_ap);
+			draw(g);
 			
 			x_av = x_ap;
 			x_ap = x_ap + 25;
