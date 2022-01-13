@@ -163,10 +163,7 @@ public class Fenetre extends JFrame implements ActionListener{
 		// ====== DESSIN ==========
 			// Creation du dessin
 			d = new DessinNRZ();
-			
-			
 	 }
-
 }
 
 
