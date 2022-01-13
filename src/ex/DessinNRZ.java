@@ -313,44 +313,6 @@ public class DessinNRZ extends Canvas {
 		}
 		
 		/**
-		 * Dessiner les lignes pour Manchester
-		 * @param g
-		 * @param valeur
-		 */
-		public void condMan(Graphics g, int valeur) {
-			// Si la valeur est 1 cela vaut dire que nous allons partir en haut
-			if(valeur == 1) {
-				y_av = haut;
-				y_ap = haut;
-			} else {
-				// Sinon on part en bas
-				y_av = bas;
-				y_ap = bas;
-			}
-			
-			
-			draw(g);
-			
-			x_av = x_ap;
-			
-			if(valeur == 1) {
-				y_ap = bas;
-			} else {
-				y_ap = haut;
-			}
-			
-			draw(g);
-			
-			x_ap = x_ap + 25;
-			y_av = y_ap;
-			draw(g);
-			
-			x_av = x_ap;
-			x_ap = x_ap + 25;
-		}
-		
-		
-		/**
 		 * Methode pour savoir s'il y aura un changement de nombre
 		 * @param n
 		 * @param c
@@ -379,8 +341,6 @@ public class DessinNRZ extends Canvas {
 		public void xApresDoubleSaut() {
 			x_ap = x_ap + double_saut;
 		}
-		
-		
 		
 		/**
 		 * Incrementation de x_av
