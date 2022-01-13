@@ -14,14 +14,15 @@ public class DessinNRZ extends Canvas implements Dess{
 		public String choix;
 		public ActionEvent e;
 
-		public int x_ap;
-		public int y_av;
-		public int y_ap;
-		public int x_av; 
-		
 		public int haut = 100;
 		public int bas = 300;
 		public int izq = 100;
+		
+		public int x_av = izq;
+		public int x_ap = izq;
+		public int y_av = haut;
+		public int y_ap = haut;
+		 
 		
 		public DessinNRZ() {
 		}
@@ -37,9 +38,6 @@ public class DessinNRZ extends Canvas implements Dess{
 		public void setChoix(String s) {
 			this.choix = s;
 		}
-
-		
-
 
 		public ActionEvent getE() {
 			return e;
@@ -191,44 +189,39 @@ public class DessinNRZ extends Canvas implements Dess{
 		 */
 		public void miller(Graphics g) {
 			creationBase(g);
+			
+			x_av = izq;
+			x_ap = izq;
+			
+			y_av = haut;
+			y_ap = haut;
+			
+			for (int n=0; n < str.length(); n++) {
+			 	char c = str.charAt (n);
+			 	
+			 	switch(c) {
+			 		case '1' : {
+			 					 faireChemin(g);
+			 					 break;
+			 					}
+			 		case '0' : {
+			 					 
+			 					ligneRect(g);	
+			 					
+			 					if(n+1 < str.length()) {
+			 						if(!change(n, c)) {
+			 							faireLigneVerticale(g);
+			 						}
+			 					}
+			 					
+			 					break;
+			 				   }
+			 	}
+			 	
+			}
+			
 		}
 		
-		/**
-		 * Dessiner les lignes pour Manchester
-		 * @param g
-		 * @param valeur
-		 */
-		public void condMan(Graphics g, int valeur) {
-			// Si la valeur est 1 cela vaut dire que nous allons partir en haut
-			if(valeur == 1) {
-				y_av = haut;
-				y_ap = haut;
-			} else {
-				// Sinon on part en bas
-				y_av = bas;
-				y_ap = bas;
-			}
-			
-			
-			g.drawLine(x_av, y_av, x_ap, y_ap);
-			
-			x_av = x_ap;
-			
-			if(valeur == 1) {
-				y_ap = bas;
-			} else {
-				y_ap = haut;
-			}
-			
-			g.drawLine(x_av, y_av, x_ap, y_ap);
-			
-			x_ap = x_ap + 25;
-			y_av = y_ap;
-			g.drawLine(x_av, y_av, x_ap, y_ap);
-			
-			x_av = x_ap;
-			x_ap = x_ap + 25;
-		}
 		
 		// ==================== D'autres méthodes =====================================
 		
@@ -282,6 +275,44 @@ public class DessinNRZ extends Canvas implements Dess{
 		}
 		
 		/**
+		 * Dessiner les lignes pour Manchester
+		 * @param g
+		 * @param valeur
+		 */
+		public void condMan(Graphics g, int valeur) {
+			// Si la valeur est 1 cela vaut dire que nous allons partir en haut
+			if(valeur == 1) {
+				y_av = haut;
+				y_ap = haut;
+			} else {
+				// Sinon on part en bas
+				y_av = bas;
+				y_ap = bas;
+			}
+			
+			
+			g.drawLine(x_av, y_av, x_ap, y_ap);
+			
+			x_av = x_ap;
+			
+			if(valeur == 1) {
+				y_ap = bas;
+			} else {
+				y_ap = haut;
+			}
+			
+			g.drawLine(x_av, y_av, x_ap, y_ap);
+			
+			x_ap = x_ap + 25;
+			y_av = y_ap;
+			g.drawLine(x_av, y_av, x_ap, y_ap);
+			
+			x_av = x_ap;
+			x_ap = x_ap + 25;
+		}
+		
+		
+		/**
 		 * Methode pour savoir s'il y aura un changement
 		 * @param n
 		 * @param c
@@ -301,7 +332,7 @@ public class DessinNRZ extends Canvas implements Dess{
 		 * Incrementation de la variable puor avancer
 		 */
 		public void xApresAvancer() {
-			x_ap = x_av + 25;
+			x_ap = x_ap + 25;
 		}
 		
 		/**
@@ -330,7 +361,7 @@ public class DessinNRZ extends Canvas implements Dess{
 		 * @param g
 		 */
 		public void faireLigneVerticale(Graphics g) {
-			x_av = x_ap;
+			xAvantAvancer();
 			if(y_ap == haut ) {
 				y_ap = bas;
 				draw(g);
@@ -340,6 +371,20 @@ public class DessinNRZ extends Canvas implements Dess{
 				draw(g);
 				y_av = haut;
 			}
+		}
+		
+		/**
+		 * Pour dessiner une ligne rect
+		 * @param g
+		 */
+		public void ligneRect(Graphics g) {
+			System.out.println("x : " + x_ap);
+			xApresAvancer();
+			xApresAvancer();
+			System.out.println("x : " + x_ap);
+			draw(g);
+			xAvantAvancer();
+			
 		}
 		
 		/**
