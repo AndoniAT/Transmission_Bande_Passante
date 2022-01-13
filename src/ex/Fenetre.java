@@ -23,7 +23,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	public JButton jb3;
 	public JButton jb4;
 	public JTextField edit;
-	public MonPanel jpTexte;
+	public JPanel jpTexte;
 	
 	public JPanel jpDessin;
 	public DessinNRZ d;
@@ -92,8 +92,8 @@ public class Fenetre extends JFrame implements ActionListener{
 	 
 	 public void creation () {
 		// setSize(500,500);
-		 jp = new MonPanel();
-		 jpDessin = new MonPanel();
+		 jp = new JPanel();
+		 jpDessin = new JPanel();
 		 
 		 box = new BoxLayout(jp, BoxLayout.Y_AXIS);
 		 
@@ -139,7 +139,7 @@ public class Fenetre extends JFrame implements ActionListener{
 			
 		// ====== TEXTE ET TEXTFIELD ==========
 			// Panel du texte
-			jpTexte = new MonPanel();
+			jpTexte = new JPanel();
 			
 			// Layout
 			boxL = new BoxLayout(jpTexte, BoxLayout.X_AXIS);
@@ -167,25 +167,6 @@ public class Fenetre extends JFrame implements ActionListener{
 			
 	 }
 
-	 private class MonPanel extends JPanel {
-		    {
-		        setOpaque(true);
-		    }
-		    
-		    public void paintComponent(Graphics g) {
-		        super.paintComponent(g);
-		        setOpaque(true);
-		    }
-		    
-		    public void changeSize(int w, int h){
-		    	super.paintComponent(getGraphics());
-		    	System.out.println("size : " + getSize());
-		    	System.out.println("changeeee");
-		    	setSize(w, h);
-		    	System.out.println("size : " + getSize());
-		    	repaint();
-		    }
-		}
 }
 
 
