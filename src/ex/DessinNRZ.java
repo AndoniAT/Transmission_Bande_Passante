@@ -27,13 +27,9 @@ public class DessinNRZ extends Canvas implements Dess{
 		public DessinNRZ() {
 		}
 		
-		
-		
 		public String getChoix() {
 			return choix;
 		}
-
-
 
 		public void setChoix(String s) {
 			this.choix = s;
@@ -43,13 +39,9 @@ public class DessinNRZ extends Canvas implements Dess{
 			return e;
 		}
 
-
-
 		public void setE(ActionEvent e) {
 			this.e = e;
 		}
-
-
 
 		public String getStr() {
 			return str;
@@ -63,32 +55,36 @@ public class DessinNRZ extends Canvas implements Dess{
 		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
-			System.out.println("chossss" );
-			
-			
-			if(str.equals(null))
+			System.out.println("h");
+			// Si il n'y a rien écrit on ne fait rien
+			if(str.length() ==0 ) {
 				return;
+			}
 			
+			creationBase(g);	
 			
+			// Appel de methodes selon le boutton choisi
 			switch(choix) {
-	        case "Manchester Differenciel" : {
-	        				manchesterDiff(g);
-	        				break;
-	        		}
-	        case "Manchester" : {
-		        			manchester(g);
-		        			break;
-	        		}
+		        case "Manchester Differenciel" : {
+					manchesterDiff(g);
+	    			break;
+	     		}
+		        
+		        case "Manchester" : {
+		        	manchester(g);
+		        	break;
+		        }
+		        
+		        case "NRZ" : {
+		        	nrz(g);
+		        	break;
+		        }
+		        
+		        case "Miller" : {
+				    miller(g);
+				    break;
+		        }
 	        
-	        case "NRZ" : {
-	        				nrz(g);
-	        				break;
-	        		}
-	        
-	        case "Miller" : {
-	        			miller(g);
-	        			break;
-	        		}
 	        }
 		}
 		
@@ -97,7 +93,6 @@ public class DessinNRZ extends Canvas implements Dess{
 		 * @param g
 		 */
 		public void nrz(Graphics g) {
-			creationBase(g);
 			x_av = 100;
 			x_ap = 150;
 			
@@ -134,8 +129,6 @@ public class DessinNRZ extends Canvas implements Dess{
 		}
 		
 		public void manchester(Graphics g) {
-			creationBase(g);
-			
 			x_av = 100;
 			x_ap = 125;
 			
@@ -162,8 +155,6 @@ public class DessinNRZ extends Canvas implements Dess{
 		 * @param g
 		 */
 		public void manchesterDiff(Graphics g) {
-			creationBase(g);
-			
 			x_av = izq;
 			x_ap = x_av;
 			y_av = haut;
@@ -188,8 +179,6 @@ public class DessinNRZ extends Canvas implements Dess{
 		 * @param g
 		 */
 		public void miller(Graphics g) {
-			creationBase(g);
-			
 			x_av = izq;
 			x_ap = izq;
 			

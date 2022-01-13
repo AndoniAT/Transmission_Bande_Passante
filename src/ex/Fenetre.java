@@ -29,16 +29,20 @@ public class Fenetre extends JFrame implements ActionListener{
 	public JPanel dessinPanel;
 	
 	public Fenetre() {
-	
+		
 		setBounds(100,100,300,500);
 		setTitle("Titre");
 		
+		// Panel de bouttons
 		JPanel jpBouttons = new JPanel();
 		
+		// Layout pour les bouttons
 		FlowLayout flButton = new FlowLayout();
 		
+		// On étabi le layout dans le panel
 		jpBouttons.setLayout(flButton);
 		
+		// Creation de bouttons
 		jb1 = new JButton("Manchester");
 		jb1.addActionListener(this);
 		
@@ -51,33 +55,41 @@ public class Fenetre extends JFrame implements ActionListener{
 		jb4 = new JButton("Miller");
 		jb4.addActionListener(this);
 		
-		
+		// Ajout des bouttons dans le panel
 		jpBouttons.add(jb1);
 		jpBouttons.add(jb2);
 		jpBouttons.add(jb3);
 		jpBouttons.add(jb4);
 		
-
+		
+		// Panel du texte
 		jpTexte = new JPanel();
 		JLabel texte = new JLabel("Veuilliez de saissir votre nombre binaire : ");
 		
+		// Champ pour écrire le nombre binaire
 		edit = new JTextField(15);
 		
+		// Ajout du texte et du champ dans le panel
 		jpTexte.add(texte);
 		jpTexte.add(edit);
 		
-		
-		
+		// Ajout de paneaux
 		add(jpBouttons, BorderLayout.NORTH);
 		add(jpTexte, BorderLayout.CENTER);
 		
-		d = new DessinNRZ();
+		// Panel pour le dessin
 		dessinPanel = new JPanel();
 		
+		// Creation du dessin
+		d = new DessinNRZ();
+		
+		// Ajout du dessin eu Panel
 		dessinPanel.add(d);
 		
+		// Ajout du panel au JFrame
         add(dessinPanel, BorderLayout.SOUTH);
         
+        // Sortir du programme
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		//setSize(500, 500);
@@ -93,8 +105,8 @@ public class Fenetre extends JFrame implements ActionListener{
 	        d.setChoix(s);
 	        d.setStr(edit.getText());
 			d.setE(e);
-	        d.repaint();
-	        jpTexte.repaint();
+	        //d.repaint();
+	        //jpTexte.repaint();
 	        add(jpTexte);
 			add(d);
 	        
@@ -113,71 +125,4 @@ public class Fenetre extends JFrame implements ActionListener{
 
 
 	    }
-	 
-	 public void nrz(ActionEvent e) {
-		 //jpDessin.repaint();
-		 JPanel jpDessin = new JPanel();
-		 
-		 String str = edit.getText();
-		 /*BoxLayout boxL = new BoxLayout(jpDessin, BoxLayout.X_AXIS);
-		 
-		 jpDessin.setLayout(boxL);*/
-		 //jpDessin.add(d);
-		 
-		 this.add(jpDessin, BorderLayout.CENTER);
-		 
-		 
-	 }
-	 
-	 public void manchester(ActionEvent e) {
-		 System.out.println("man");
-		 
-		 String str = edit.getText();
-		 
-		 for (int n=0; n < str.length(); n++) {
-			 	char c = str.charAt (n); 
-			 	if(c == '1') {
-			 		System.out.println(c + " true");
-			 	} else {
-			 		System.out.println(c + " false");
-			 	}
-			 }
-
-
-	 }
-	 
-	 public void manchesterDiff(ActionEvent e) {
-		 System.out.println("man Diff");
-		 
-		 String str = edit.getText();
-		 
-		 for (int n=0; n < str.length(); n++) {
-			 	char c = str.charAt (n); 
-			 	if(c == '1') {
-			 		System.out.println(c + " true");
-			 	} else {
-			 		System.out.println(c + " false");
-			 	}
-			 }
-
-	 }
-	 
-	 public void miller(ActionEvent e) {
-		 System.out.println("miller");
-		 String str = edit.getText();
-		 
-		 for (int n=0; n < str.length(); n++) {
-			 	char c = str.charAt (n); 
-			 	if(c == '1') {
-			 		System.out.println(c + " true");
-			 	} else {
-			 		System.out.println(c + " false");
-			 	}
-			 }
-
-	 }
-	
-
-	
-
 }
