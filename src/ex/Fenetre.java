@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 public class Fenetre extends JFrame implements ActionListener{
 	// Bouttons
-	public JButton jb1 , jb2 ,jb3, jb4;
+	public JButton jb1 , jb2 ,jb3, jb4, jb5;
 	
 	// Panels
 	public JPanel jpTexte, jpBT;
@@ -93,22 +93,25 @@ public class Fenetre extends JFrame implements ActionListener{
 			jpBouttons.setLayout(flButton);
 			
 			// Creation de bouttons
-			jb1 = new JButton("Manchester");
-			jb2 = new JButton("Manchester Differenciel");
-			jb3 = new JButton("NRZ");
-			jb4 = new JButton("Miller");
+			jb1 = new JButton("NRZ");
+			jb2 = new JButton("NRZI");
+			jb3 = new JButton("Manchester");
+			jb4 = new JButton("Manchester Differenciel");
+			jb5 = new JButton("Miller");
 			
 			// Ajout listener pour les bouttons
 			jb1.addActionListener(this);
 			jb2.addActionListener(this);
 			jb3.addActionListener(this);
 			jb4.addActionListener(this);
+			jb5.addActionListener(this);
 			
 			// Ajout des bouttons dans le panel
 			jpBouttons.add(jb1);
 			jpBouttons.add(jb2);
 			jpBouttons.add(jb3);
 			jpBouttons.add(jb4);
+			jpBouttons.add(jb5);
 			
 			// Ajout bouttons dans le JPanel
 			jpBT.add(jpBouttons);
