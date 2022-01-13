@@ -168,38 +168,9 @@ public class DessinNRZ extends Canvas implements Dess{
 			 	char c = str.charAt (n);
 			 	
 			 	if(c == '1') {
-					y_av = haut;
-					y_ap = haut;
-					
-					g.drawLine(x_av, y_av, x_ap, y_ap);
-					
-					x_av = x_ap;
-					y_ap = bas;
-					g.drawLine(x_av, y_av, x_ap, y_ap);
-					
-					x_ap = x_ap + 25;
-					y_av = y_ap;
-					g.drawLine(x_av, y_av, x_ap, y_ap);
-					
-					x_av = x_ap;
-					x_ap = x_ap + 25;
-					
+			 		condMan(g, 1);
 				} else {
-					y_av = bas;
-					y_ap = bas;
-					
-					g.drawLine(x_av, y_av, x_ap, y_ap);
-					
-					x_av = x_ap;
-					y_ap = haut;
-					g.drawLine(x_av, y_av, x_ap, y_ap);
-					
-					x_ap = x_ap + 25;
-					y_av = y_ap;
-					g.drawLine(x_av, y_av, x_ap, y_ap);
-					
-					x_av = x_ap;
-					x_ap = x_ap + 25;
+					condMan(g, 0);
 				}
 			 	
 			 	if(n+1 < str.length()) {
@@ -254,5 +225,38 @@ public class DessinNRZ extends Canvas implements Dess{
 			g2d.setStroke(bsLine);
 			g2d.setColor(Color.RED);
 			
+		}
+		
+		// Dessiner les lignes pour Manchester
+		public void condMan(Graphics g, int valeur) {
+			// Si la valeur est 1 cela vaut dire que nous allons partir en haut
+			if(valeur == 1) {
+				y_av = haut;
+				y_ap = haut;
+			} else {
+				// Sinon on part en bas
+				y_av = bas;
+				y_ap = bas;
+			}
+			
+			
+			g.drawLine(x_av, y_av, x_ap, y_ap);
+			
+			x_av = x_ap;
+			
+			if(valeur == 1) {
+				y_ap = bas;
+			} else {
+				y_ap = haut;
+			}
+			
+			g.drawLine(x_av, y_av, x_ap, y_ap);
+			
+			x_ap = x_ap + 25;
+			y_av = y_ap;
+			g.drawLine(x_av, y_av, x_ap, y_ap);
+			
+			x_av = x_ap;
+			x_ap = x_ap + 25;
 		}
 }
