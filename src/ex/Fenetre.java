@@ -27,6 +27,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	public JPanel jpDessin;
 	public DessinNRZ d;
 	public JPanel dessinPanel;
+	public Dessin dd;
 	
 	public Fenetre() {
 		
@@ -82,12 +83,12 @@ public class Fenetre extends JFrame implements ActionListener{
 		
 		// Creation du dessin
 		d = new DessinNRZ();
-		
 		// Ajout du dessin eu Panel
-		dessinPanel.add(d);
+		//dessinPanel.add(d);
 		
 		// Ajout du panel au JFrame
-        add(dessinPanel, BorderLayout.SOUTH);
+        //add(dessinPanel, BorderLayout.SOUTH);
+        //add(dd, BorderLayout.SOUTH);
         
         // Sortir du programme
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -98,17 +99,20 @@ public class Fenetre extends JFrame implements ActionListener{
 	}
 	
 	 public void actionPerformed(ActionEvent e){
+		 System.out.println("mmm");
 		 	// quand on a cliqué sur le bouton ici
 	        JButton b = (JButton)e.getSource();
 	        String s = e.getActionCommand();
 	        
 	        d.setChoix(s);
 	        d.setStr(edit.getText());
-			d.setE(e);
-	        //d.repaint();
+			//d.setE(e);
+	        d.repaint();
 	        //jpTexte.repaint();
-	        add(jpTexte);
-			add(d);
+	        //add(jpTexte);
+	        
+	        add(d);
+
 	        
 	        int w = 100;
 	        

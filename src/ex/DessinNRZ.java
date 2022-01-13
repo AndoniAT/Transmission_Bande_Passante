@@ -9,22 +9,33 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.event.ActionEvent;
 
-public class DessinNRZ extends Canvas implements Dess{		
+public class DessinNRZ extends Canvas {		
 		public String str;
 		public String choix;
 		public ActionEvent e;
 
-		public int haut = 100;
-		public int bas = 300;
-		public int izq = 100;
+		public int haut;
+		public int bas;
+		public int izq;
 		
-		public int x_av = izq;
-		public int x_ap = izq;
-		public int y_av = haut;
-		public int y_ap = haut;
+		public int x_av;
+		public int x_ap;
+		public int y_av;
+		public int y_ap;
 		 
-		
 		public DessinNRZ() {
+			reinitialiser();
+		}
+		
+		public void reinitialiser() {
+			haut = 100;
+			bas = 300;
+			izq = 100;
+			
+			x_av = izq;
+			x_ap = izq;
+			y_av = haut;
+			y_ap = haut;
 		}
 		
 		public String getChoix() {
@@ -51,18 +62,16 @@ public class DessinNRZ extends Canvas implements Dess{
 			this.str = str;
 		}
 		
-
 		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
-			System.out.println("h");
+			
+			
 			// Si il n'y a rien écrit on ne fait rien
-			if(str.length() ==0 ) {
+			if(str.length() == 0 ) {
 				return;
 			}
-			
-			creationBase(g);	
-			
+			creationBase(g);
 			// Appel de methodes selon le boutton choisi
 			switch(choix) {
 		        case "Manchester Differenciel" : {
@@ -84,8 +93,11 @@ public class DessinNRZ extends Canvas implements Dess{
 				    miller(g);
 				    break;
 		        }
+		        
+		        default: return;
 	        
 	        }
+			reinitialiser();
 		}
 		
 		/**
@@ -93,13 +105,7 @@ public class DessinNRZ extends Canvas implements Dess{
 		 * @param g
 		 */
 		public void nrz(Graphics g) {
-			x_av = 100;
-			x_ap = 150;
-			
-			if(str.charAt(0) == '1') {
-				y_av = 100;
-				y_ap = 100;
-			} else {
+			if(str.charAt(0) == '0') {
 				y_av = 300;
 				y_ap = 300;
 			}
@@ -107,25 +113,15 @@ public class DessinNRZ extends Canvas implements Dess{
 			for (int n=0; n < str.length(); n++) {
 			 	char c = str.charAt (n);
 			 	
-			 	g.drawLine(x_av, y_av, x_ap, y_ap);
-			 		
-			 	x_av = x_ap;
+			 	ligneRect(g);
 			 	
 			 	if(n+1 < str.length()) {
 			 		if(change(n, c)) {
-			 			
-			 			if(str.charAt(n+1) == '0') {
-			 				y_ap = y_ap + 200;
-			 			} else {
-			 				y_ap = y_ap - 200;
-			 			}
-			 			
-			 			g.drawLine(x_av, y_av, x_ap, y_ap);
-			 			y_av = y_ap;
+			 			faireLigneVerticale(g);
 			 		}
 			 	}		 		
-			 	x_ap = x_ap + 50;	
 			 }
+			return;
 		}
 		
 		public void manchester(Graphics g) {
@@ -367,10 +363,8 @@ public class DessinNRZ extends Canvas implements Dess{
 		 * @param g
 		 */
 		public void ligneRect(Graphics g) {
-			System.out.println("x : " + x_ap);
 			xApresAvancer();
 			xApresAvancer();
-			System.out.println("x : " + x_ap);
 			draw(g);
 			xAvantAvancer();
 			
