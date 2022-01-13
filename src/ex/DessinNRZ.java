@@ -72,12 +72,13 @@ public class DessinNRZ extends Canvas {
 		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
-			
+			System.out.println("holaaaa");
 			
 			// Si il n'y a rien écrit on ne fait rien
 			if(str.length() == 0 ) {
 				return;
 			}
+			
 			creationBase(g);
 			// Appel de methodes selon le boutton choisi
 			switch(choix) {
