@@ -19,6 +19,9 @@ public class DessinNRZ extends Canvas implements Dess{
 		public int y_ap;
 		public int x_av; 
 		
+		public int haut = 100;
+		public int bas = 300;
+		
 		public DessinNRZ() {
 		}
 		
@@ -94,6 +97,20 @@ public class DessinNRZ extends Canvas implements Dess{
 		public void nrz(Graphics g) {
 			creationBase(g);
 			
+			if(str.charAt(0) == '1') {
+				x_av = 100;
+				x_ap = 150;
+				y_av = 100;
+				y_ap = 100;
+				
+			} else {
+				x_av = 100;	
+				y_av = 300;
+				x_ap = 150;
+				y_ap = 300;
+				
+			}
+			
 			for (int n=0; n < str.length(); n++) {
 			 	char c = str.charAt (n);
 			 	
@@ -143,6 +160,55 @@ public class DessinNRZ extends Canvas implements Dess{
 		
 		public void manchester(Graphics g) {
 			creationBase(g);
+			
+			x_av = 100;
+			x_ap = 125;
+			
+			for (int n=0; n < str.length(); n++) {
+			 	char c = str.charAt (n);
+			 	
+			 	if(c == '1') {
+					y_av = haut;
+					y_ap = haut;
+					
+					g.drawLine(x_av, y_av, x_ap, y_ap);
+					
+					x_av = x_ap;
+					y_ap = bas;
+					g.drawLine(x_av, y_av, x_ap, y_ap);
+					
+					x_ap = x_ap + 25;
+					y_av = y_ap;
+					g.drawLine(x_av, y_av, x_ap, y_ap);
+					
+					x_av = x_ap;
+					x_ap = x_ap + 25;
+					
+				} else {
+					y_av = bas;
+					y_ap = bas;
+					
+					g.drawLine(x_av, y_av, x_ap, y_ap);
+					
+					x_av = x_ap;
+					y_ap = haut;
+					g.drawLine(x_av, y_av, x_ap, y_ap);
+					
+					x_ap = x_ap + 25;
+					y_av = y_ap;
+					g.drawLine(x_av, y_av, x_ap, y_ap);
+					
+					x_av = x_ap;
+					x_ap = x_ap + 25;
+				}
+			 	
+			 	if(n+1 < str.length()) {
+				 	if(!change(n, c)) {
+				 		g.drawLine(x_av, haut, x_av, bas);
+				 	}
+			 	}
+			}
+			
 		}
 
 		public void creationBase(Graphics g) {
@@ -174,21 +240,6 @@ public class DessinNRZ extends Canvas implements Dess{
 			
 			if(str.length() == 0) {
 				return;
-			}
-			
-			
-			if(str.charAt(0) == '1') {
-				x_av = 100;
-				x_ap = 150;
-				y_av = 100;
-				y_ap = 100;
-				
-			} else {
-				x_av = 100;	
-				y_av = 300;
-				x_ap = 150;
-				y_ap = 300;
-				
 			}
 			
 			g.setColor(Color.BLACK);
