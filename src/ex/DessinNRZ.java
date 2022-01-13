@@ -23,6 +23,9 @@ public class DessinNRZ extends Canvas {
 		public int y_av;
 		public int y_ap;
 		 
+		public int saut;
+		public int double_saut;
+		
 		public DessinNRZ() {
 			reinitialiser();
 		}
@@ -31,11 +34,15 @@ public class DessinNRZ extends Canvas {
 			haut = 100;
 			bas = 300;
 			izq = 100;
+			saut = 25;
+			double_saut = saut +saut;
 			
 			x_av = izq;
 			x_ap = izq;
 			y_av = haut;
 			y_ap = haut;
+			
+			
 		}
 		
 		public String getChoix() {
@@ -170,12 +177,6 @@ public class DessinNRZ extends Canvas {
 		 * @param g
 		 */
 		public void miller(Graphics g) {
-			x_av = izq;
-			x_ap = izq;
-			
-			y_av = haut;
-			y_ap = haut;
-			
 			for (int n=0; n < str.length(); n++) {
 			 	char c = str.charAt (n);
 			 	
@@ -220,36 +221,38 @@ public class DessinNRZ extends Canvas {
 			
 			// On fait le bord
 			g.setColor(Color.BLUE);
-			g.drawRect(90, 60, str.length() * 50 + 20, 280);
+			g.drawRect(izq - 10, haut - 40, str.length() * 50 + 20, 280);
 			
 			// Section cadre gris
 			g.setColor(Color.GRAY);
-			for(int i = 100, j = 0 ; j <= str.length() ; i = i + 50, j++) {
-				g.drawLine(i, 80, i, 320);
+			for(int i = izq, j = 0 ; j <= str.length() ; i = i + 50, j++) {
+				g.drawLine(i, haut - 20, i, bas + 20);
 			}
 			
+			int difference = 20;
 			
-			g.drawLine(100, 80, max, 80);
-			g.drawLine(100, 320, max, 320);
+			int hautCadreGris = haut - difference;
+			int basCadreGris = bas + difference;
+			int milieu = bas - haut; 
+			g.drawLine(izq, hautCadreGris, max, hautCadreGris);
+			g.drawLine(izq, basCadreGris, max, basCadreGris);
 			
-			g.drawLine(100, 100, max, 100);
-			g.drawLine(100, 200, max, 200);
-			g.drawLine(100, 300, max, 300);
+			g.drawLine(izq, haut, max, izq);
+			g.drawLine(izq, milieu, max, milieu);
+			g.drawLine(izq, bas, max, bas);
 			
-			if(str.length() == 0) {
-				return;
-			}
 			
 			g.setColor(Color.BLACK);
 			
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
 			
-			g.drawString("nV", 50, 100);
-			g.drawString("0V", 50, 200);
-			g.drawString("-nV", 50, 300);
+			g.drawString("nV", double_saut, izq);
+			g.drawString("0V", double_saut, milieu);
+			g.drawString("-nV", double_saut, bas);
 			
 			BasicStroke bsLine = new BasicStroke(6);
 			g2d.setStroke(bsLine);
+			
 			g2d.setColor(Color.RED);
 			
 		}
@@ -309,11 +312,20 @@ public class DessinNRZ extends Canvas {
 		}
 		
 		/**
-		 * Incrementation de la variable puor avancer
+		 * Incrementation de la variable pour avancer un saut
 		 */
-		public void xApresAvancer() {
-			x_ap = x_ap + 25;
+		public void xApresSaut() {
+			x_ap = x_ap + saut;
 		}
+		
+		/**
+		 * Incrementation de la variable pour avancer deux saut
+		 */
+		public void xApresDoubleSaut() {
+			x_ap = x_ap + double_saut;
+		}
+		
+		
 		
 		/**
 		 * Incrementation de x_av
@@ -327,10 +339,10 @@ public class DessinNRZ extends Canvas {
 		 * @param g
 		 */
 		public void faireChemin(Graphics g) {
-			xApresAvancer();
+			xApresSaut();
 			draw(g);
 			faireLigneVerticale(g);
-			xApresAvancer();
+			xApresSaut();
 			draw(g);
 			xAvantAvancer();
 			
@@ -358,8 +370,7 @@ public class DessinNRZ extends Canvas {
 		 * @param g
 		 */
 		public void ligneRect(Graphics g) {
-			xApresAvancer();
-			xApresAvancer();
+			xApresDoubleSaut();
 			draw(g);
 			xAvantAvancer();
 			
