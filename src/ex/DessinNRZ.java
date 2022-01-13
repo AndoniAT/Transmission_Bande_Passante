@@ -96,19 +96,15 @@ public class DessinNRZ extends Canvas implements Dess{
 		
 		public void nrz(Graphics g) {
 			creationBase(g);
+			x_av = 100;
+			x_ap = 150;
 			
 			if(str.charAt(0) == '1') {
-				x_av = 100;
-				x_ap = 150;
 				y_av = 100;
 				y_ap = 100;
-				
 			} else {
-				x_av = 100;	
 				y_av = 300;
-				x_ap = 150;
 				y_ap = 300;
-				
 			}
 			
 			for (int n=0; n < str.length(); n++) {
