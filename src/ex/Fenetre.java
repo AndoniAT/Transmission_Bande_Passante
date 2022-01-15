@@ -71,7 +71,7 @@ public class Fenetre extends JFrame implements ActionListener{
 				char c = nv.charAt(i);
 				System.out.println(c);
 				if(c != '0' && c != '1') {
-					JOptionPane.showMessageDialog(this, "messaged'infomation");
+					JOptionPane.showMessageDialog(this, "Vieuillez d'ecrire que du code binaire");
 					return;
 				}
 			}
