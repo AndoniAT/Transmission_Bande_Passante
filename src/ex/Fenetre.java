@@ -1,15 +1,23 @@
 package ex;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Desktop.Action;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class Fenetre extends JFrame implements ActionListener{
 	// Bouttons
@@ -46,11 +54,34 @@ public class Fenetre extends JFrame implements ActionListener{
 	 * Action des bouttons
 	 */
 	 public void actionPerformed(ActionEvent e){
+		 	String txt = edit.getText();
+		 	String nv = "";
+		 	
+		 	// Copier le text sans des champs vides
+		 	for (int i = 0; i < txt.length(); i++) {
+				char c = txt.charAt(i);
+		 		if(c != ' ') {
+		 			nv = nv + c;
+		 		}
+			}
+		 	
+		 	System.out.println(nv);
+		 	// Verifier que le texte soit un code binaire
+		 	for (int i = 0; i < nv.length(); i++) {
+				char c = txt.charAt(i);
+				if(c != '0' && c != '1') {
+					JOptionPane.showMessageDialog(this, "messaged'infomation");
+					return;
+				}
+			}
+		 	
+		 	
+
 	        JButton b = (JButton)e.getSource();
 	        String s = e.getActionCommand();
 	        
 	        d.setChoix(s);
-	        d.setStr(edit.getText());
+	        d.setStr(nv);
 	        add(d, BorderLayout.CENTER);
 	        
 			int w = 150;
@@ -127,7 +158,27 @@ public class Fenetre extends JFrame implements ActionListener{
 			// Creation elements
 	        txt = "Veuilliez de saissir votre nombre binaire : ";
 			texte = new JLabel(txt);	
+			
 			edit = new JTextField(15);
+			
+			
+			edit.addKeyListener(new KeyListener() {				
+				@Override
+				public void keyTyped(KeyEvent e) {
+					
+				}
+				
+				@Override
+				public void keyReleased(KeyEvent e) {
+				}
+
+				private void verification(KeyEvent e, int length) {
+				}
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+				}
+			});
 			
 			// Ajout du texte et du champ dans le panel
 			jpTexte.add(texte);
@@ -142,4 +193,8 @@ public class Fenetre extends JFrame implements ActionListener{
 			// Creation du dessin
 			d = new Dessin();
 	 }
+	 
+	 
+	 
+	 
 }
