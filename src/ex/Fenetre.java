@@ -68,7 +68,8 @@ public class Fenetre extends JFrame implements ActionListener{
 		 	System.out.println(nv);
 		 	// Verifier que le texte soit un code binaire
 		 	for (int i = 0; i < nv.length(); i++) {
-				char c = txt.charAt(i);
+				char c = nv.charAt(i);
+				System.out.println(c);
 				if(c != '0' && c != '1') {
 					JOptionPane.showMessageDialog(this, "messaged'infomation");
 					return;
